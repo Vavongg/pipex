@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 14:34:11 by ainthana          #+#    #+#             */
-/*   Updated: 2025/03/28 17:45:33 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/03/28 18:08:58 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../ft_printf/ft_printf.h"
 
 //src
-void	parse_args(int ac, char **av);
+void	parse_args(int ac, char **av, char **env);
 int		is_valid_command(char *cmd, char **env);
 char	**ft_split(char *str, char sep);
 void	free_args(char **args);
