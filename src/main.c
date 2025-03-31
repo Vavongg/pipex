@@ -15,9 +15,19 @@
 int	main(int ac, char **av, char **env)
 {
 	(void)env;
+	int fd[2];
+
+	if (pipe(fd) == -1)
+	{
+		perror("fd");
+		return (1);
+	}
 	if (ac != 5)
 		exit(EXIT_FAILURE);
-	parse_args(ac, av, env);
-	create_file(ac, &av[4]);
+	//parse_args(ac, av, env);
+	create_fork1(ac, av, env, fd);
+	create_fork2(ac, &av[4], env, fd);
+	close(fd[0]);
+	close(fd[1]);
 	return (0);
 }

@@ -26,7 +26,9 @@
 void	parse_args(int ac, char **av, char **env);
 int		is_valid_command(char *cmd, char **env);
 char	**ft_split(char *str, char sep);
+int		ft_strlen(char *str);
+char	*ft_strdup(char *str);
 void	free_args(char **args);
-void	create_file(int ac, char **av);
-
+void	create_fork1(int ac, char **av, char **env, int fd[2]);
+void	create_fork2(int ac, char **av, char **env, int fd[2]);
 #endif 

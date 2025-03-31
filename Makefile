@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 PRINTF = ft_printf/printf
 
-SRC = src/main.c src/parsing.c src/ft_split.c src/utils.c
+SRC = src/main.c src/parsing.c src/libft/ft_split.c  src/libft/ft_strdup.c src/utils.c
 
 UTILS = 
 

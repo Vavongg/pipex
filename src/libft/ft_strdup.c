@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/pipex.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *str)
 {
-	char	*str;
+	char	*s;
 	size_t	i;
 
 	i = 0;
-	str = malloc(sizeof(*s) * (ft_strlen(s) + 1));
-	if (!str)
+	s = malloc(sizeof(*str) * (ft_strlen(str) + 1));
+	if (!s)
 		return (NULL);
-	while (s[i])
+	while (str[i])
 	{
-		str[i] = s[i];
+		s[i] = str[i];
 		i++;
 	}
-	str[i] = 0;
-	return (str);
+	s[i] = 0;
+	return (s);
 }
