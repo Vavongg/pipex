@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 14:34:11 by ainthana          #+#    #+#             */
-/*   Updated: 2025/03/28 18:08:58 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:53:26 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	**ft_split(char *str, char sep);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 void	free_args(char **args);
-void	create_fork1(int ac, char **av, char **env, int fd[2]);
-void	create_fork2(int ac, char **av, char **env, int fd[2]);
+void	create_fork1(char **av, char **env, int fd[2]);
+void	create_fork2(char **av, char **env, int fd[2]);
+
 #endif 
