@@ -77,6 +77,57 @@ char	*find_path(char *cmd, char **env)
 	return (NULL);
 }
 
+char	*get_path(char *cmd, char **envp)
+{
+	char	**paths;
+	char	*good_path;
+
+	if (!cmd)
+		return (NULL);
+	paths = get_paths_from_env(envp);
+	good_path = find_executable(cmd, paths);
+	return (good_path);
+
+}
+char	**get_paths_from_env(char **envp)
+{
+	int	i;
+
+	if (!envp)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strnstr(envp[i], "PATH=", 5))
+			return (ft_split(envp[i] + 5, ':'));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*find_executable(char *cmd, char **paths)
+{
+	int		i;
+	char	*full_path;
+	char	*tmp_path;
+
+	if (!paths)
+		return (cmd);
+	i = 0;
+	while (paths[i])
+	{
+		tmp_path = ft_strjoin(paths[i], "/");
+		full_path = ft_strjoin(tmp_path, cmd);
+		free(tmp_path);
+		if (access(full_path, F_OK) == 0)
+			return (full_path);
+		free(full_path);
+		i++;
+	}
+	free_args(paths);
+	return (cmd);
+}
+
 void	exec_cmd(char *argv, char **env)
 {
 	char	**cmd;
@@ -85,10 +136,7 @@ void	exec_cmd(char *argv, char **env)
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
 		return ;
-	if (access(cmd[0], F_OK) == 0)
-		path = cmd[0];
-	else
-		path = find_path(cmd[0], env);
+	path = get_path(cmd[0], env);
 	if (!path)
 	{
 		free_args(cmd);
@@ -98,6 +146,7 @@ void	exec_cmd(char *argv, char **env)
 	if (execve(path, cmd, env) == -1)
 	{
 		free(path);
+		perror("command not found");
 		exit(126);
 	}
 }
