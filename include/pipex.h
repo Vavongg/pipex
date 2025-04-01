@@ -6,30 +6,30 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 14:34:11 by ainthana          #+#    #+#             */
-/*   Updated: 2025/03/31 22:53:26 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:53:23 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <fcntl.h>      // open  
-# include <unistd.h>     // close, read, write, access, dup, dup2, execve, fork, pipe, unlink  
-# include <stdlib.h>     // malloc, free, exit  
-# include <stdio.h>      // perror  
-# include <string.h>     // strerror  
-# include <sys/types.h>  // wait, waitpid  
-# include <sys/wait.h>   // wait, waitpid
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../ft_printf/ft_printf.h"
 
 //src
-void	parse_args(int ac, char **av, char **env);
-int		is_valid_command(char *cmd, char **env);
 char	**ft_split(char *str, char sep);
-int		ft_strlen(char *str);
-char	*ft_strdup(char *str);
+char	*ft_strnstr(const char *big, const char *little, size_t len);
+char	*ft_strjoin(char *s1, char *s2);
 void	free_args(char **args);
-void	create_fork1(char **av, char **env, int fd[2]);
-void	create_fork2(char **av, char **env, int fd[2]);
+void	child(char **av, char **env, int fd[2]);
+void	parent(char **av, char **env, int fd[2]);
+char	*find_path(char *cmd, char **env);
+void	exec_cmd(char *argv, char **env);
 
 #endif 

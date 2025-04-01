@@ -1,9 +1,10 @@
 NAME = pipex
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g3
 PRINTF = ft_printf/printf
 
-SRC = src/main.c src/parsing.c src/libft/ft_split.c  src/libft/ft_strdup.c src/utils.c
+SRC = src/main.c src/utils.c \
+	  src/libft/ft_split.c  src/libft/ft_strdup.c src/libft/ft_strjoin.c src/libft/ft_strnstr.c
 
 UTILS = 
 

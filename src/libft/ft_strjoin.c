@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 14:22:11 by ainthana          #+#    #+#             */
-/*   Updated: 2025/03/31 22:55:15 by ainthana         ###   ########.fr       */
+/*   Created: 2025/04/01 11:49:32 by ainthana          #+#    #+#             */
+/*   Updated: 2025/04/01 11:53:02 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../../include/pipex.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int		fd[2];
-	pid_t	pid1;
+	char	*tab;
+	int		i;
+	int		j;
 
-	if (ac == 5)
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	tab = (char *)malloc(sizeof(*tab) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	if (tab == 0)
+		return (NULL);
+	while (s1[i])
 	{
-		if (pipe(fd) == -1)
-		{
-			close(fd[0]);
-			close(fd[1]);
-			perror("pipe");
-		}
-		pid1 = fork();
-		if (pid1 == 0)
-			child(av, env, fd);
-		waitpid(pid1, NULL, 0);
-		parent(av, env, fd);
+		tab[i] = s1[i];
+		i++;
 	}
-	else
+	while (s2[j])
 	{
-		perror("bad arguments");
-		exit(EXIT_FAILURE);
+		tab[i] = s2[j];
+		j++;
+		i++;
 	}
-	return (0);
+	tab[i] = '\0';
+	return (tab);
 }

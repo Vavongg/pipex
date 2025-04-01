@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 14:22:11 by ainthana          #+#    #+#             */
-/*   Updated: 2025/03/31 22:55:15 by ainthana         ###   ########.fr       */
+/*   Created: 2025/04/01 11:46:36 by ainthana          #+#    #+#             */
+/*   Updated: 2025/04/01 11:47:40 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../../include/pipex.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int		fd[2];
-	pid_t	pid1;
+	size_t	i;
+	size_t	j;
+	char	*found;
 
-	if (ac == 5)
+	i = 0;
+	j = 0;
+	if (!little[j])
+		return ((char *) big);
+	while (big[i] && i < len)
 	{
-		if (pipe(fd) == -1)
+		if (big[i] == little[0])
 		{
-			close(fd[0]);
-			close(fd[1]);
-			perror("pipe");
+			while (big[i + j] == little[j] && little[j] && i + j < len)
+				j++;
+			if (little[j] == '\0')
+			{
+				found = (char *) &big[i];
+				return (found);
+			}
 		}
-		pid1 = fork();
-		if (pid1 == 0)
-			child(av, env, fd);
-		waitpid(pid1, NULL, 0);
-		parent(av, env, fd);
-	}
-	else
-	{
-		perror("bad arguments");
-		exit(EXIT_FAILURE);
+		j = 0;
+		i++;
 	}
 	return (0);
 }
