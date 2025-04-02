@@ -12,7 +12,7 @@
 
 #include "../include/pipex.h"
 
-void	child(char **av, char **env, int fd[2])
+void	child(char **av, char **envp, int fd[2])
 {
 	int		filein;
 
@@ -30,10 +30,10 @@ void	child(char **av, char **env, int fd[2])
 	close(fd[0]);
 	close(fd[1]);
 	close(filein);
-	exec_cmd(av[2], env);
+	exec_cmd(av[2], envp);
 }
 
-void	parent(char **av, char **env, int fd[2])
+void	parent(char **av, char **envp, int fd[2])
 {
 	int		fileout;
 
@@ -48,10 +48,10 @@ void	parent(char **av, char **env, int fd[2])
 	close(fd[1]);
 	close(fd[0]);
 	close(fileout);
-	exec_cmd(av[3], env);
+	exec_cmd(av[3], envp);
 }
 
-void	exec_cmd(char *av, char **env)
+void	exec_cmd(char *av, char **envp)
 {
 	char	**cmd;
 	char	*path;
@@ -59,14 +59,14 @@ void	exec_cmd(char *av, char **env)
 	cmd = ft_split(av, ' ');
 	if (!cmd)
 		return ;
-	path = get_path(cmd[0], env);
+	path = get_path(cmd[0], envp);
 	if (!path)
 	{
 		free_args(cmd);
 		perror("command not found");
 		exit(127);
 	}
-	if (execve(path, cmd, env) == -1)
+	if (execve(path, cmd, envp) == -1)
 	{
 		free(path);
 		perror("command not found");

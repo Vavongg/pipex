@@ -27,12 +27,12 @@ char	**ft_split(char *str, char sep);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 void	free_args(char **args);
-void	child(char **av, char **env, int fd[2]);
-void	parent(char **av, char **env, int fd[2]);
-char	*find_path(char *cmd, char **env);
-void	exec_cmd(char *argv, char **env);
-char	**get_paths_from_env(char **env);
-char	*get_path(char *cmd, char **env);
+void	child(char **av, char **envp, int fd[2]);
+void	parent(char **av, char **envp, int fd[2]);
+char	*find_path(char *cmd, char **envp);
+void	exec_cmd(char *argv, char **envp);
+char	**get_paths_from_env(char **envp);
+char	*get_path(char *cmd, char **envp);
 char	*find_executable(char *cmd, char **paths);
 
 #endif 

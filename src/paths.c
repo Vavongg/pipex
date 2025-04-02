@@ -12,29 +12,29 @@
 
 #include "../include/pipex.h"
 
-char	*get_path(char *cmd, char **env)
+char	*get_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*good_path;
 
 	if (!cmd)
 		return (NULL);
-	paths = get_paths_from_env(env);
+	paths = get_paths_from_env(envp);
 	good_path = find_executable(cmd, paths);
 	return (good_path);
 }
 
-char	**get_paths_from_env(char **env)
+char	**get_paths_from_env(char **envp)
 {
 	int	i;
 
-	if (!env)
+	if (!envp)
 		return (NULL);
 	i = 0;
-	while (env[i])
+	while (envp[i])
 	{
-		if (ft_strnstr(env[i], "PATH=", 5))
-			return (ft_split(env[i] + 5, ':'));
+		if (ft_strnstr(envp[i], "PATH=", 5))
+			return (ft_split(envp[i] + 5, ':'));
 		i++;
 	}
 	return (NULL);

@@ -12,7 +12,7 @@
 
 #include "../include/pipex.h"
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **envp)
 {
 	int		fd[2];
 	pid_t	pid1;
@@ -26,8 +26,8 @@ int	main(int ac, char **av, char **env)
 		}
 		pid1 = fork();
 		if (pid1 == 0)
-			child(av, env, fd);
-		parent(av, env, fd);
+			child(av, envp, fd);
+		parent(av, envp, fd);
 	}
 	else
 	{
