@@ -21,14 +21,12 @@ int	main(int ac, char **av, char **env)
 	{
 		if (pipe(fd) == -1)
 		{
-			close(fd[0]);
-			close(fd[1]);
 			perror("pipe");
+			exit(EXIT_FAILURE);
 		}
 		pid1 = fork();
 		if (pid1 == 0)
 			child(av, env, fd);
-		waitpid(pid1, NULL, 0);
 		parent(av, env, fd);
 	}
 	else

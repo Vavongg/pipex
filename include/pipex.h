@@ -31,11 +31,8 @@ void	child(char **av, char **env, int fd[2]);
 void	parent(char **av, char **env, int fd[2]);
 char	*find_path(char *cmd, char **env);
 void	exec_cmd(char *argv, char **env);
-char	**get_paths_from_env(char **envp);
-char	*get_path(char *cmd, char **envp);
+char	**get_paths_from_env(char **env);
+char	*get_path(char *cmd, char **env);
 char	*find_executable(char *cmd, char **paths);
-
-
-
 
 #endif 
