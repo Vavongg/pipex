@@ -22,7 +22,6 @@ void	child(char **av, char **envp, int fd[2])
 		perror(av[1]);
 		close(fd[0]);
 		close(fd[1]);
-		close(filein);
 		exit(EXIT_FAILURE);
 	}
 	dup2(fd[1], STDOUT_FILENO);
@@ -41,6 +40,7 @@ void	parent(char **av, char **envp, int fd[2])
 	if (fileout == -1)
 	{
 		perror(av[4]);
+		close(fd[0]);
 		close(fd[1]);
 	}
 	dup2(fd[0], STDIN_FILENO);
@@ -68,7 +68,7 @@ void	exec_cmd(char *av, char **envp)
 	}
 	if (execve(path, cmd, envp) == -1)
 	{
-		free(path);
+		free_args(cmd);
 		perror("command not found");
 		exit(126);
 	}
