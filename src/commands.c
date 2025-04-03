@@ -42,6 +42,7 @@ void	parent(char **av, char **envp, int fd[2])
 		perror(av[4]);
 		close(fd[0]);
 		close(fd[1]);
+		exit(EXIT_FAILURE);
 	}
 	dup2(fd[0], STDIN_FILENO);
 	dup2(fileout, STDOUT_FILENO);
